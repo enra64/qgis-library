@@ -12,6 +12,7 @@ def setup_qgis() -> QgsApplication:
     QgsApplication.setPrefixPath("/usr", True)
     qgs = QgsApplication([], False)
     qgs.initQgis()
+    find_processing_lib()
     return qgs
 
 

@@ -1,8 +1,6 @@
 import csv
 import re
-from typing import Union, Dict, List
-
-from qgis.core import QgsVectorLayer
+from typing import Dict, List
 
 
 def filename_to_uri(filename: str) -> str:
@@ -11,7 +9,7 @@ def filename_to_uri(filename: str) -> str:
 
 def read_csv_file(filename: str) -> List[Dict]:
     with open(filename, "r") as file:
-        reader = csv.DictReader(file, delimiter='\t', quoting=csv.QUOTE_NONE)
+        reader = csv.DictReader(file, delimiter=',', quoting=csv.QUOTE_NONE)
         return list(reader)
 
 
