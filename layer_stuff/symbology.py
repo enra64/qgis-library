@@ -1,4 +1,4 @@
-from PyQt5.uic.properties import QtGui
+from qgis.PyQt import QtGui
 from qgis.core import QgsVectorLayer, QgsArrowSymbolLayer, QgsFillSymbol, QgsRasterLayer, \
     QgsSingleBandPseudoColorRenderer, QgsColorRampShader, QgsRasterShader
 
@@ -6,9 +6,11 @@ from qgis.core import QgsVectorLayer, QgsArrowSymbolLayer, QgsFillSymbol, QgsRas
 def set_arrow_symbology(layer: QgsVectorLayer):
     layer_symbol = layer.renderer().symbol()
     arrow_symbol_layer = QgsArrowSymbolLayer.create(
-        {'arrow_width': '5', 'head_length': '4', 'head_thickness': '6', 'head_type': '0'})
+        {'arrow_width': '5', 'head_length': '4', 'head_thickness': '6', 'head_type': '0'}
+    )
     arrow_fill_sub_symbol = QgsFillSymbol.createSimple(
-        {'color': '#8bcfff', 'outline_color': '#000000', 'outline_style': 'solid', 'outline_width': '1'})
+        {'color': '#8bcfff', 'outline_color': '#000000', 'outline_style': 'solid', 'outline_width': '1'}
+    )
     arrow_symbol_layer.setSubSymbol(arrow_fill_sub_symbol)
     layer_symbol.changeSymbolLayer(0, arrow_symbol_layer)
 

@@ -4,7 +4,7 @@ from typing import Union, List, Optional
 from qgis.core import QgsProject, QgsMapLayer, QgsVectorLayer, QgsRasterLayer
 
 from csv_tools.file import guess_layer_name
-from csv_tools.filter import create_uri_filter_end
+from layer_stuff.csv_layer_filtering import create_uri_filter_end
 
 
 def add_layer_to_project(layer: QgsMapLayer):
