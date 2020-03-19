@@ -8,11 +8,12 @@ def create_line_geometry(csv_rows: List[Dict]) -> QgsGeometry:
     return QgsGeometry.fromPolyline(polyline=points)
 
 
-def create_line_layer(csv_file_name: str, name: str) -> QgsVectorLayer:
+def create_line_layer(geometry: QgsGeometry, name: str) -> QgsVectorLayer:
     result_layer = QgsVectorLayer("Point", name, "memory")
     data_provider = result_layer.dataProvider()
     result_layer.startEditing()
     feature = QgsFeature(result_layer.fields())
+    feature.setGeometry(geometry)
     data_provider.addFeatures([feature])
     result_layer.commitChanges()
     return result_layer
