@@ -9,10 +9,11 @@ def create_line_geometry(csv_rows: List[Dict]) -> QgsGeometry:
 
 
 def create_line_layer(geometry: QgsGeometry, name: str) -> QgsVectorLayer:
-    result_layer = QgsVectorLayer("Point", name, "memory")
+    result_layer = QgsVectorLayer("LineString?crs=EPSG:4326", name, "memory")
     data_provider = result_layer.dataProvider()
     result_layer.startEditing()
     feature = QgsFeature(result_layer.fields())
+    feature.initAttributes(len(result_layer.fields()))
     feature.setGeometry(geometry)
     data_provider.addFeatures([feature])
     result_layer.commitChanges()

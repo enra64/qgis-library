@@ -1,3 +1,4 @@
+from qgis.PyQt import QtGui
 from qgis.core import QgsProject
 
 from csv_tools.file import filename_to_uri, read_csv_file
@@ -8,6 +9,7 @@ from layer_stuff.basic import create_vector_layer_from_csv, add_layer_to_project
 from layer_stuff.csv_layer_filtering import create_id_and_direction_filter, create_id_and_time_bracket_filter, \
     create_uri_filter_end
 from layer_stuff.memory_layer_persistence import persistify_vector_layer
+from layer_stuff.symbology import set_arrow_symbology
 
 call_layer_filename = "/home/arne/Documents/git-repos/ubiquitous-systems/generated/cdr-converted/calls.csv"
 call_layer_uri = filename_to_uri(call_layer_filename)
@@ -39,16 +41,17 @@ def __show_movement(user_id: str, date: str):
     geometry = create_line_geometry(csv_data)
     memory_line_layer = create_line_layer(geometry, "{} movement on {}".format(user_id, date))
     persistent_line_layer = persistify_vector_layer(persistency_folder, memory_line_layer)
+    set_arrow_symbology(persistent_line_layer)
     add_layer_to_project(persistent_line_layer)
 
 
-def __show_heatmap(user_id: str, time_bracket: str):
+def __show_heatmap(user_id: str, time_bracket: str, color: QtGui.QColor):
     id_tb_filter = create_id_and_time_bracket_filter(user_id, time_bracket)
     temp_layer_name = "heatmap tmp layer {} {}".format(user_id, time_bracket)
     temp_layer = create_vector_layer_from_csv(call_layer_uri, temp_layer_name, id_tb_filter)
 
     heatmap_layer_name = "{} heatmap for {}".format(time_bracket.capitalize(), user_id)
-    heatmap_layer = create_heatmap(temp_layer, persistency_folder, heatmap_layer_name)
+    heatmap_layer = create_heatmap(temp_layer, persistency_folder, heatmap_layer_name, color)
     add_layer_to_project(heatmap_layer)
 
 
@@ -59,5 +62,6 @@ def execute(user_id: str, date: str):
     __show_movement(user_id, date)
 
     time_brackets = ["morning", "midday", "night"]
-    for time_bracket in time_brackets:
-        __show_heatmap(user_id, time_bracket)
+    colors = [QtGui.QColor("red"), QtGui.QColor("green"), QtGui.QColor("blue")]
+    for i, time_bracket in enumerate(time_brackets):
+        __show_heatmap(user_id, time_bracket, colors[i])

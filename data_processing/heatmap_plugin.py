@@ -1,9 +1,11 @@
+from qgis.PyQt import QtGui
 from qgis.core import QgsVectorLayer, QgsRasterLayer
 
 from layer_stuff.basic import read_raster_layer
+from layer_stuff.symbology import set_color_heatmap_symbology
 
 
-def create_heatmap(input_layer: QgsVectorLayer, persistence_folder: str, name: str) -> QgsRasterLayer:
+def create_heatmap(input_layer: QgsVectorLayer, persistence_folder: str, name: str, color: QtGui.QColor) -> QgsRasterLayer:
     from processing.core.Processing import Processing
     Processing.initialize()
     import processing
@@ -19,4 +21,6 @@ def create_heatmap(input_layer: QgsVectorLayer, persistence_folder: str, name: s
                                                            "OUTPUT_VALUE": 0,
                                                            "OUTPUT": out_path})
 
-    return read_raster_layer(out_path, name)
+    raster_layer = read_raster_layer(out_path, name)
+    set_color_heatmap_symbology(raster_layer, color)
+    return raster_layer
