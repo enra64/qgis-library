@@ -14,6 +14,8 @@ def filter_and_group_calls(csv_file_name: str, out_name: str, user_id: str, date
     """
     filtered_calls = filter_id_date(read_csv_file(csv_file_name, delimiter=","), user_id, date)
 
+    filtered_calls.sort(key=lambda _: _["ts"])
+
     for index, row in enumerate(filtered_calls):
         row["index"] = index
 
@@ -26,3 +28,7 @@ def filter_and_group_calls(csv_file_name: str, out_name: str, user_id: str, date
         writer = csv.DictWriter(outfile, delimiter=",", fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(grouped_calls)
+
+
+if __name__ == "__main__":
+    filter_and_group_calls("/home/arne/Documents/git-repos/ubiquitous-systems/generated/cdr-converted/calls.csv", "generated/test.csv", "24490292", "2007-05-02")

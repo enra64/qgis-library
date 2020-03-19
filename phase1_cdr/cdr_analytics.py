@@ -64,7 +64,7 @@ def __show_order_of_visits(user_id: str, date: str):
 
     order_layer_name = "Order of visits for {} on {}".format(user_id, date)
     layer = create_vector_layer_from_csv(filename_to_uri(temp_filename), order_layer_name)
-    set_font_symbology(layer, "index", 8, QColor("black"))
+    set_font_symbology(layer, "index", 6, QColor("black"))
     add_layer_to_project(layer)
 
 
