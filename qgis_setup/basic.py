@@ -1,5 +1,6 @@
 import sys
 
+from PyQt5.QtWidgets import QApplication
 from qgis.core import QgsApplication, QgsProject
 
 
@@ -8,15 +9,14 @@ def find_processing_lib():
 
 
 def setup_qgis(project_filename: str) -> QgsApplication:
-    # noinspection PyCallByClass,PyTypeChecker
+    #app = QApplication([])
     QgsApplication.setPrefixPath("/usr", True)
+    QgsApplication.initQgis()
     qgs = QgsApplication([], False)
-    qgs.initQgis()
 
     find_processing_lib()
+    print(qgs)
+
     QgsProject.instance().read(project_filename)
     return qgs
 
-
-def exit_qgis(outfile: str, qgs: QgsApplication):
-    qgs.exitQgis()

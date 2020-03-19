@@ -30,7 +30,7 @@ def convert():
 
     all_rows = []
     for csv_file_name, csv_info in csv_file_names.items():
-        rows = read_csv_file(csv_base_path + csv_file_name)
+        rows = read_csv_file(csv_base_path + csv_file_name, delimiter=",")
         for row in rows:
             row["id"] = csv_info["id"]
         all_rows.extend(rows)

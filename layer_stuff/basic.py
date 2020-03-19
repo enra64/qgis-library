@@ -17,9 +17,8 @@ def add_layer_to_project(layer: QgsMapLayer):
 
 def create_vector_layer_from_csv(file_uri: str,
                                  layer_name: Optional[str],
-                                 qgis_filters: List[str]) -> QgsVectorLayer:
-    file_uri += create_uri_filter_end(qgis_filters)
-    layer = QgsVectorLayer(file_uri, "", "delimitedtext")
+                                 qgis_subset_filter: Optional[str] = None) -> QgsVectorLayer:
+    layer = QgsVectorLayer(file_uri + create_uri_filter_end(qgis_subset_filter), "", "delimitedtext")
     feature_count = str(layer.featureCount())
 
     if layer_name is None:

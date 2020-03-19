@@ -1,0 +1,12 @@
+/usr/share/qgis/python
+/home/arne/.local/share/QGIS/QGIS3/profiles/default/python
+/home/arne/.local/share/QGIS/QGIS3/profiles/default/python/plugins
+/usr/share/qgis/python/plugins
+/usr/lib/python38.zip
+/usr/lib/python3.8
+/usr/lib/python3.8/lib-dynload
+/usr/lib/python3.8/site-packages
+/home/arne/.local/share/QGIS/QGIS3/profiles/default/python
+/home/arne/Documents/git-repos/ubiquitous-systems/
+/usr/share/qgis/python/plugins/
+/home/arne/Documents/git-repos/ubiquitous-systems
