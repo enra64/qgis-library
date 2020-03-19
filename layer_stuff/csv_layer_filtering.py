@@ -2,7 +2,7 @@ from typing import Dict, List, Optional
 
 
 def __create_filter_string(filters: Dict[str, str]) -> str:
-    return "subset=" + " AND ".join(["%22{}%22%20%3D%20'{}'".format(key, value) for key, value in filters.items()])
+    return "subset=" + "%20AND%20".join(["%22{}%22%20%3D%20'{}'".format(key, value) for key, value in filters.items()])
 
 
 def create_id_and_direction_filter(user_id: str, direction: str) -> str:

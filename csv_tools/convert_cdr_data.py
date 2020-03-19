@@ -36,7 +36,7 @@ def convert():
         all_rows.extend(rows)
 
     for row in all_rows:
-        is_incoming = row["id"] == "originating_id"
+        is_incoming = row["id"] == row["originating_id"]
 
         if is_incoming:
             row["longitude"] = row["orig_longitude"]
@@ -65,7 +65,7 @@ def convert():
     header = ["id", "longitude", "latitude", "direction", "date", "time", "duration", "time_bracket", "ts"]
 
     with open(output_path + "calls.csv", "w") as outfile:
-        writer = csv.DictWriter(outfile, delimiter=";", fieldnames=header)
+        writer = csv.DictWriter(outfile, delimiter=",", fieldnames=header)
         writer.writeheader()
         writer.writerows(all_rows)
 
