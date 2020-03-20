@@ -4,7 +4,7 @@ from PyQt5.QtGui import QPainter
 from qgis.PyQt import QtGui
 from qgis.core import QgsVectorLayer, QgsArrowSymbolLayer, QgsFillSymbol, QgsRasterLayer, \
     QgsSingleBandPseudoColorRenderer, QgsColorRampShader, QgsRasterShader, QgsRasterBandStats, QgsRasterDataProvider, \
-    QgsRasterRenderer, QgsMarkerSymbol, QgsFontMarkerSymbolLayer, QgsPropertyCollection, QgsProperty
+    QgsRasterRenderer, QgsMarkerSymbol, QgsFontMarkerSymbolLayer, QgsProperty
 
 
 # noinspection PyCallByClass,PyArgumentList
