@@ -1,0 +1,1 @@
+SELECT COUNT(*), timestamp::date FROM checkins WHERE user_id = '170604' GROUP BY timestamp::date ORDER BY count DESC;

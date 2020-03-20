@@ -9,7 +9,7 @@ def find_processing_lib():
 
 
 def setup_qgis(project_filename: str) -> QgsApplication:
-    #app = QApplication([])
+    # app = QApplication([])
     QgsApplication.setPrefixPath("/usr", True)
     QgsApplication.initQgis()
     qgs = QgsApplication([], False)
@@ -20,3 +20,6 @@ def setup_qgis(project_filename: str) -> QgsApplication:
     QgsProject.instance().read(project_filename)
     return qgs
 
+
+def write_project(filename: str):
+    QgsProject.instance().write(filename)

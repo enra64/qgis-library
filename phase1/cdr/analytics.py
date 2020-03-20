@@ -12,6 +12,7 @@ from layer_stuff.csv_layer_filtering import create_id_and_direction_filter, crea
     create_uri_filter_end
 from layer_stuff.memory_layer_persistence import persistify_vector_layer
 from layer_stuff.symbology import set_arrow_symbology, set_cross_symbol, set_font_symbology
+from qgis_setup.basic import write_project
 
 call_layer_filename = "/generated/cdr-converted/calls.csv"
 call_layer_uri = filename_to_uri(call_layer_filename)
@@ -79,3 +80,6 @@ def execute(user_id: str, date: str):
     colors = [QColor("red"), QColor("green"), QColor("blue")]
     for i, time_bracket in enumerate(time_brackets):
         __show_heatmap(user_id, time_bracket, colors[i])
+
+    outfile = "/home/arne/Documents/git-repos/ubiquitous-systems/generated/CDR.qgz"
+    write_project(outfile)
