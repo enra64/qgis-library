@@ -13,14 +13,14 @@ from layer_stuff.csv_layer_filtering import create_id_and_direction_filter, crea
 from layer_stuff.memory_layer_persistence import persistify_vector_layer
 from layer_stuff.symbology import set_arrow_symbology, set_cross_symbol, set_font_symbology
 
-call_layer_filename = "/home/arne/Documents/git-repos/ubiquitous-systems/generated/cdr-converted/calls.csv"
+call_layer_filename = "/generated/cdr-converted/calls.csv"
 call_layer_uri = filename_to_uri(call_layer_filename)
 persistency_folder = "/home/arne/Documents/git-repos/ubiquitous-systems/generated/"
 
 
 def __load_cell_tower_layer():
     cell_tower_uri = filename_to_uri(
-        "/home/arne/Documents/git-repos/ubiquitous-systems/assets/cdr/cell_towers_porto.csv")
+        "/assets/cdr/cell_towers_porto.csv")
     cell_tower_layer = create_vector_layer_from_csv(cell_tower_uri, "Porto Cell Tower")
     set_cross_symbol(cell_tower_layer, "cross", "black")
     add_layer_to_project(cell_tower_layer)
@@ -78,5 +78,4 @@ def execute(user_id: str, date: str):
     time_brackets = ["morning", "midday", "night"]
     colors = [QColor("red"), QColor("green"), QColor("blue")]
     for i, time_bracket in enumerate(time_brackets):
-        pass
-        #__show_heatmap(user_id, time_bracket, colors[i])
+        __show_heatmap(user_id, time_bracket, colors[i])
