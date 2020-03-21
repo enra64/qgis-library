@@ -1,6 +1,4 @@
 from PyQt5.QtGui import QColor
-from qgis.PyQt import QtGui
-from qgis.core import QgsProject
 
 from csv_tools.file import filename_to_uri, read_csv_file
 from csv_tools.filter import filter_id_date
@@ -8,22 +6,21 @@ from data_processing.group_and_filter import filter_and_group_calls
 from data_processing.heatmap_plugin import create_heatmap
 from data_processing.lines import create_line_geometry, create_line_layer
 from layer_stuff.basic import create_vector_layer_from_csv, add_layer_to_project
-from layer_stuff.csv_layer_filtering import create_id_and_direction_filter, create_id_and_time_bracket_filter, \
-    create_uri_filter_end
+from layer_stuff.csv_layer_filtering import create_id_and_direction_filter, create_id_and_time_bracket_filter
 from layer_stuff.memory_layer_persistence import persistify_vector_layer
-from layer_stuff.symbology import set_arrow_symbology, set_cross_symbol, set_font_symbology
+from layer_stuff.symbology import set_arrow_symbology, set_font_symbology, set_cross_symbol
 from qgis_setup.basic import write_project
 
-call_layer_filename = "/generated/cdr-converted/calls.csv"
+call_layer_filename = "/home/arne/Documents/git-repos/ubiquitous-systems/generated/cdr-converted/calls.csv"
+cell_tower_filename = "/home/arne/Documents/git-repos/ubiquitous-systems/assets/cdr/cell_towers_porto.csv"
 call_layer_uri = filename_to_uri(call_layer_filename)
 persistency_folder = "/home/arne/Documents/git-repos/ubiquitous-systems/generated/"
 
 
 def __load_cell_tower_layer():
-    cell_tower_uri = filename_to_uri(
-        "/assets/cdr/cell_towers_porto.csv")
-    cell_tower_layer = create_vector_layer_from_csv(cell_tower_uri, "Porto Cell Tower")
-    set_cross_symbol(cell_tower_layer, "cross", "black")
+    cell_tower_uri = filename_to_uri(cell_tower_filename)
+    cell_tower_layer = create_vector_layer_from_csv(cell_tower_uri, "Porto Cell Towers")
+    set_cross_symbol(cell_tower_layer, "black")
     add_layer_to_project(cell_tower_layer)
 
 

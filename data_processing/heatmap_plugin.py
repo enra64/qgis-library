@@ -10,7 +10,7 @@ def create_heatmap(input_layer: QgsVectorLayer, persistence_folder: str, name: s
     Processing.initialize()
     import processing
 
-    out_path = "{}/{}-heatmap.tif".format(persistence_folder, name.replace(" ", "_"))
+    out_path = "{}{}-heatmap.tif".format(persistence_folder, name.replace(" ", "_"))
 
     processing.run("qgis:heatmapkerneldensityestimation", {'INPUT': input_layer,
                                                            "KERNEL": 4,

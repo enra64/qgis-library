@@ -40,7 +40,7 @@ def set_font_symbology(layer: QgsVectorLayer, text_source_field: str, font_size:
     layer.renderer().setSymbol(symbol)
 
 
-def set_cross_symbol(layer: QgsVectorLayer, desired_symbol: str, color: Union[None, str, QtGui.QColor]):
+def set_cross_symbol(layer: QgsVectorLayer, color: Union[None, str, QtGui.QColor]):
     """
     :param layer: the layer of which the symbology should be changed
     :param desired_symbol: one of circle, square, cross, rectangle, diamond, pentagon, triangle, equilateral_triangle,

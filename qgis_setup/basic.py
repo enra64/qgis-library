@@ -15,7 +15,6 @@ def setup_qgis(project_filename: str) -> QgsApplication:
     qgs = QgsApplication([], False)
 
     find_processing_lib()
-    print(qgs)
 
     QgsProject.instance().read(project_filename)
     return qgs

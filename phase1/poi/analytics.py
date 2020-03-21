@@ -73,10 +73,7 @@ def __show_movement(user_id: str, date: str):
     ewkt_line_query = point_selection_to_ewkt_query(point_selection_query)
 
     ewkt = __execute_single_cell_result_query(lambda cursor: cursor.execute(ewkt_line_query))
-    print(ewkt_line_query)
-    print(ewkt)
     geometry = create_line_geometry_postgis(ewkt)
-    print(geometry)
     memory_line_layer = create_line_layer(geometry, "Movement of {} on {}".format(user_id, date))
     persistent_line_layer = persistify_vector_layer(persistency_folder, memory_line_layer)
     set_arrow_symbology(persistent_line_layer)
