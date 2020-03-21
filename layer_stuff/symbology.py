@@ -7,17 +7,30 @@ from qgis.core import QgsVectorLayer, QgsArrowSymbolLayer, QgsFillSymbol, QgsRas
     QgsRasterRenderer, QgsMarkerSymbol, QgsFontMarkerSymbolLayer, QgsProperty
 
 
-# noinspection PyCallByClass,PyArgumentList
-def set_arrow_symbology(layer: QgsVectorLayer):
+def set_linestring_arrow_symbology(layer: QgsVectorLayer):
     layer_symbol = layer.renderer().symbol()
+    # noinspection PyCallByClass,PyArgumentList
     arrow_symbol_layer = QgsArrowSymbolLayer.create(
         {'arrow_width': '3', 'head_length': '4', 'head_thickness': '4', 'head_type': '0', "is_curved": "0"}
     )
+    # noinspection PyCallByClass,PyArgumentList
     arrow_fill_sub_symbol = QgsFillSymbol.createSimple(
         {'color': '#8bcfff', 'outline_color': '#000000', 'outline_style': 'solid', 'outline_width': '0.5'}
     )
     arrow_symbol_layer.setSubSymbol(arrow_fill_sub_symbol)
     layer_symbol.changeSymbolLayer(0, arrow_symbol_layer)
+
+
+def set_arrow_symbology(layer: QgsVectorLayer, color: str, angle: int):
+    # noinspection PyCallByClass,PyArgumentList
+    symbol = QgsMarkerSymbol.createSimple(
+        {'angle': str(angle), 'color': color, 'horizontal_anchor_point': '1', 'joinstyle': 'bevel', 'name': 'arrow',
+         'offset': '0,0', 'offset_map_unit_scale': '3x:0,0,0,0,0,0', 'offset_unit': 'MM',
+         'outline_color': '35,35,35,255', 'outline_style': 'solid', 'outline_width': '0',
+         'outline_width_map_unit_scale': '3x:0,0,0,0,0,0', 'outline_width_unit': 'MM', 'scale_method': 'diameter',
+         'size': '6', 'size_map_unit_scale': '3x:0,0,0,0,0,0', 'size_unit': 'MM', 'vertical_anchor_point': '1'}
+    )
+    layer.renderer().setSymbol(symbol)
 
 
 def set_font_symbology(layer: QgsVectorLayer, text_source_field: str, font_size: int, color: QtGui.QColor):

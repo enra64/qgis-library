@@ -9,7 +9,7 @@ from database.data_import import get_full_uri, get_pg_connection, get_sql_query_
     layer_from_database_uri, point_selection_to_ewkt_query
 from layer_stuff.basic import add_layer_to_project
 from layer_stuff.memory_layer_persistence import persistify_vector_layer
-from layer_stuff.symbology import set_arrow_symbology
+from layer_stuff.symbology import set_linestring_arrow_symbology
 from qgis_setup.basic import write_project
 
 persistency_folder = "/home/arne/Documents/git-repos/ubiquitous-systems/generated/"
@@ -76,7 +76,7 @@ def __show_movement(user_id: str, date: str):
     geometry = create_line_geometry_postgis(ewkt)
     memory_line_layer = create_line_layer(geometry, "Movement of {} on {}".format(user_id, date))
     persistent_line_layer = persistify_vector_layer(persistency_folder, memory_line_layer)
-    set_arrow_symbology(persistent_line_layer)
+    set_linestring_arrow_symbology(persistent_line_layer)
     add_layer_to_project(persistent_line_layer)
 
 

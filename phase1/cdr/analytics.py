@@ -8,7 +8,8 @@ from data_processing.lines import create_line_geometry, create_line_layer
 from layer_stuff.basic import create_vector_layer_from_csv, add_layer_to_project
 from layer_stuff.csv_layer_filtering import create_id_and_direction_filter, create_id_and_time_bracket_filter
 from layer_stuff.memory_layer_persistence import persistify_vector_layer
-from layer_stuff.symbology import set_arrow_symbology, set_font_symbology, set_cross_symbol
+from layer_stuff.symbology import set_linestring_arrow_symbology, set_font_symbology, set_cross_symbol, \
+    set_arrow_symbology
 from qgis_setup.basic import write_project
 
 call_layer_filename = "/home/arne/Documents/git-repos/ubiquitous-systems/generated/cdr-converted/calls.csv"
@@ -27,12 +28,14 @@ def __load_cell_tower_layer():
 def __load_incoming_call_layer(user_id: str):
     uri_filter = create_id_and_direction_filter(user_id, "incoming")
     incoming_calls_layer = create_vector_layer_from_csv(call_layer_uri, "Calls to " + user_id, uri_filter)
+    set_arrow_symbology(incoming_calls_layer, "green", 180)
     add_layer_to_project(incoming_calls_layer)
 
 
 def __load_outgoing_call_layer(user_id: str):
     uri_filter = create_id_and_direction_filter(user_id, "outgoing")
     outgoing_calls_layer = create_vector_layer_from_csv(call_layer_uri, "Calls from " + user_id, uri_filter)
+    set_arrow_symbology(outgoing_calls_layer, "red", 0)
     add_layer_to_project(outgoing_calls_layer)
 
 
@@ -42,7 +45,7 @@ def __show_movement(user_id: str, date: str):
     geometry = create_line_geometry(csv_data)
     memory_line_layer = create_line_layer(geometry, "{} movement on {}".format(user_id, date))
     persistent_line_layer = persistify_vector_layer(persistency_folder, memory_line_layer)
-    set_arrow_symbology(persistent_line_layer)
+    set_linestring_arrow_symbology(persistent_line_layer)
     add_layer_to_project(persistent_line_layer)
 
 
